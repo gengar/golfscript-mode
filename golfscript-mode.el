@@ -166,10 +166,7 @@
   (setq-local comment-start "# ")
   (setq font-lock-defaults
         `((golfscript-mode-font-lock-keywords)
-          nil
-          nil
-          nil
-          beginning-of-defun
+          nil nil nil beginning-of-defun
           (font-lock-mark-block-function . mark-defun)
           (parse-sexp-lookup-properties . t)))
   (setq-local syntax-propertize-function
@@ -182,8 +179,8 @@
   (eldoc-mode))
 
 ;;;###autoload
-(add-to-list 'auto-mode-alist
-             '("\\.gs\\'"
-               . golfscript-mode))
+(add-to-list 'auto-mode-alist '("\\.gs\\'" . golfscript-mode))
 
 (provide 'golfscript-mode)
+
+;;; golfscript-mode.el ends here
