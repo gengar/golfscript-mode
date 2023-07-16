@@ -27,7 +27,7 @@
   (require 'cl-lib)
   (require 'rx))
 
-(defconst golfscript-mode-version "0.1.0")
+(defconst golfscript-mode-version "0.1.1")
 
 (defvar golfscript-mode--builtin-variable-alist
   '(("n" 0 "newline")
