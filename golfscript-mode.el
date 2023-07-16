@@ -101,16 +101,16 @@
        (0+ (not (in ?\r ?\n)))))
 
 (defvar golfscript-mode-font-lock-keywords
-  `((,(rx (seq (submatch ?:)
-               (submatch (or (1+ (syntax word))
-                             (seq ?- (0+ (in "0-9")))
-                             (syntax symbol)
-                             (syntax whitespace)
-                             golfscript-mode-comment
-                             (golfscript-mode-string ?\")
-                             (golfscript-mode-string ?\')
-                             ?\[
-                             ?\]))))
+  `((,(rx (submatch ?:)
+          (submatch (or (1+ (syntax word))
+                        (seq ?- (0+ (in "0-9")))
+                        (syntax symbol)
+                        (syntax whitespace)
+                        golfscript-mode-comment
+                        (golfscript-mode-string ?\")
+                        (golfscript-mode-string ?\')
+                        ?\[
+                        ?\])))
      (1 font-lock-keyword-face)
      (2 font-lock-variable-name-face))
     (,(rx (or ?- word-start)
