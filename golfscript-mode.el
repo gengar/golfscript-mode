@@ -174,6 +174,9 @@
           (parse-sexp-lookup-properties . t)))
   (setq-local syntax-propertize-function
               #'golfscript-mode-syntax-propertize)
+
+  (setq-local require-final-newline nil)
+
   (setq-local eldoc-documentation-function
               #'golfscript-mode-info-at-point)
   (eldoc-mode))
