@@ -168,8 +168,7 @@
   (setq font-lock-defaults
         `((golfscript-mode-font-lock-keywords)
           nil nil nil beginning-of-defun
-          (font-lock-mark-block-function . mark-defun)
-          (parse-sexp-lookup-properties . t)))
+          (font-lock-mark-block-function . mark-defun)))
   (setq-local syntax-propertize-function
               #'golfscript-mode-syntax-propertize)
 
