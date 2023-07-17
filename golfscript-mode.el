@@ -161,6 +161,7 @@
     (set-keymap-parent map prog-mode)
     map))
 
+;;;###autoload
 (define-derived-mode golfscript-mode prog-mode
   "GolfScript" "Major mode for GolfScript."
   (setq-local comment-start "# ")
