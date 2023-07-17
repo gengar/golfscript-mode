@@ -5,7 +5,7 @@
 ;; Author: 2011-2023 kaki
 ;; Package-Requires: ((cl-lib "1.0") (rx))
 ;; Created: 8 Sep 2011
-;; Version: 0.1.0
+;; Version: 0.1.1
 ;; Keywords: languages, GolfScript
 
 ;; This program is free software: you can redistribute it and/or modify
