@@ -158,7 +158,7 @@
 
 (defvar golfscript-mode-map
   (let ((map (make-sparse-keymap)))
-    (set-keymap-parent map prog-mode)
+    (set-keymap-parent map prog-mode-map)
     map))
 
 ;;;###autoload
