@@ -29,6 +29,26 @@
 
 (defconst golfscript-mode-version "0.1.1")
 
+(defface golfscript-mode-assignment-face
+  '((t :inherit font-lock-keyword-face))
+  "Face used to highlight assignment operators."
+  :group 'golfscript-mode)
+
+(defface golfscript-mode-block-face
+  '((t :inherit font-lock-keyword-face))
+  "Face used to highlight start and end of blocks."
+  :group 'golfscript-mode)
+
+(defface golfscript-mode-builtin-face
+  '((t :inherit font-lock-function-name-face))
+  "Face used to highlight built-in variables with alphabetic names."
+  :group 'golfscript-mode)
+
+(defface golfscript-mode-stack-operator-face
+  '((t :inherit font-lock-builtin-face))
+  "Face used to highlight built-in variables that are bound to stack operators."
+  :group 'golfscript-mode)
+
 (defvar golfscript-mode--builtin-variable-alist
   '(("n" 0 "newline")
     ("abs" 1 "abs")
@@ -111,7 +131,7 @@
                         (golfscript-mode-string ?\')
                         ?\[
                         ?\])))
-     (1 font-lock-keyword-face)
+     (1 'golfscript-mode-assignment-face)
      (2 font-lock-variable-name-face))
     (,(rx (or ?- word-start)
           (1+ (in "0-9")))
@@ -121,9 +141,9 @@
            (regexp-opt
             (mapcar #'car golfscript-mode--builtin-variable-alist)))
           word-end)
-     . font-lock-function-name-face)
-    ("[{}]" . font-lock-keyword-face)
-    ("[][@\\;.]" . font-lock-builtin-face)))
+     . 'golfscript-mode-builtin-face)
+    ("[{}]" . 'golfscript-mode-block-face)
+    ("[][@\\;.]" . 'golfscript-mode-stack-operator-face)))
 
 (defvar golfscript-mode-syntax-table
   (let ((table (make-syntax-table prog-mode-syntax-table)))
