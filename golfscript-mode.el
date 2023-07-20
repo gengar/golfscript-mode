@@ -49,6 +49,11 @@
   "Face used to highlight built-in variables that are bound to stack operators."
   :group 'golfscript-mode)
 
+(defface golfscript-mode-string-interpolation-placeholder-face
+  '((t :inherit font-lock-variable-name-face))
+  "Face used to highlight placeholders of string-interpolation."
+  :group 'golfscript-mode)
+
 (defvar golfscript-mode--builtin-variable-alist
   '(("n" 0 "newline")
     ("abs" 1 "abs")
@@ -120,6 +125,29 @@
   (seq ?#
        (0+ (not (in ?\r ?\n)))))
 
+(defun golfscript-mode-search-string-interpolation-placeholder (end)
+  (let ((state (syntax-ppss)))
+    (while (and (not (eql ?\" (nth 3 state)))
+                (< (point) end))
+      (setq state
+            (parse-partial-sexp (point) end nil nil state 'syntax-table)))
+    (re-search-forward (rx "#"
+                           (or (seq "{"
+                                    (0+ (or (seq ?\\ anychar)
+                                            (not (in ?\\ ?\"))))
+                                    "}")
+                               (seq "$"
+                                    ;; Ruby interprets "#$0a" as "".
+                                    (or (seq (1+ (syntax word)))
+                                        ;; Ruby 1.8 accepts "#$-0".
+                                        (seq ?- (in "0-9A-Za-z_"))
+                                        ;; GolfScript rejects "#$"".
+                                        (in "!$&'*-/:-@`~")))
+                               (seq "@"
+                                    (in "A-Za-z_")
+                                    (0+ (syntax word)))))
+                       end t)))
+
 (defvar golfscript-mode-font-lock-keywords
   `((,(rx (submatch ?:)
           (submatch (or (1+ (syntax word))
@@ -143,7 +171,9 @@
           word-end)
      . 'golfscript-mode-builtin-face)
     ("[{}]" . 'golfscript-mode-block-face)
-    ("[][@\\;.]" . 'golfscript-mode-stack-operator-face)))
+    ("[][@\\;.]" . 'golfscript-mode-stack-operator-face)
+    (golfscript-mode-search-string-interpolation-placeholder
+     (0 'golfscript-mode-string-interpolation-placeholder-face prepend))))
 
 (defvar golfscript-mode-syntax-table
   (let ((table (make-syntax-table prog-mode-syntax-table)))
