@@ -5,7 +5,7 @@
 ;; Author: 2011-2023 kaki
 ;; Package-Requires: ((cl-lib "1.0") (rx))
 ;; Created: 8 Sep 2011
-;; Version: 0.1.2
+;; Version: 0.2.0
 ;; Keywords: languages, GolfScript
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@
   (require 'cl-lib)
   (require 'rx))
 
-(defconst golfscript-mode-version "0.1.2")
+(defconst golfscript-mode-version "0.2.0")
 
 (defface golfscript-mode-assignment-face
   '((t :inherit font-lock-keyword-face))
